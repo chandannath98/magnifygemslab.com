@@ -17,6 +17,13 @@ import { Link } from "react-router-dom";
     Shape_and_Cut: "",
     Colour: "",
     Measurement: "",
+
+    Clarity:"",
+    inclusion:"",
+    Finish:"",
+    Fluorences:"",
+    diamondType:"",
+
     Reflective_Index: "",
     Microscopic_Obr: "",
     Specific_Gravity: "",
@@ -24,12 +31,15 @@ import { Link } from "react-router-dom";
     ruby_type:""
   });
 
+
+
 const [isUserValid, setIsUserValid] = useState(true)
   
   useEffect(() => {
     auth.onAuthStateChanged((authUser)=>{
+     
        if(!authUser){
-        window.open("/login");
+        setIsUserValid(false)
    
        }else{
 
@@ -38,7 +48,11 @@ const [isUserValid, setIsUserValid] = useState(true)
    }, [])
    
 
+   const [selectedButton, setSelectedButton] = useState('diamond');
 
+   const handleButtonClick = (button) => {
+     setSelectedButton(button);
+   }
 
 
   const handleChange = (e) => {
@@ -58,7 +72,7 @@ const [isUserValid, setIsUserValid] = useState(true)
       
       
       
-        await addDoc(collection(db, "certificatesData"), newEntry).
+        await addDoc(collection(db, "certificatesData"), {...newEntry,type:selectedButton}).
       
           then(
            console.log("added"),
@@ -81,6 +95,30 @@ const [isUserValid, setIsUserValid] = useState(true)
 
 
     <div style={{margin:"100px 30px"}}>
+
+
+<div className="button-group">
+      <button 
+        className={`diamond-button ${selectedButton === 'diamond' ? 'activebtn' : ''}`}
+        onClick={() => handleButtonClick('diamond')}
+      >
+        Diamond
+      </button>
+      <button 
+        className={`diamond-button ${selectedButton === 'ruby' ? 'activebtn' : ''}`}
+        onClick={() => handleButtonClick('ruby')}
+      >
+        Ruby
+      </button>
+    </div>
+
+
+
+
+
+
+
+
     <form >
     <div className="form-group">
         <label htmlFor="Certificate_No">Certificate No:</label>
@@ -142,6 +180,87 @@ const [isUserValid, setIsUserValid] = useState(true)
         />
       </div>
 
+
+
+{selectedButton==="diamond"?
+<div>
+
+      <div className="form-group">
+        <label htmlFor="Clarity">Clarity:</label>
+        <input
+          type="text"
+          id="Clarity"
+          name="Clarity"
+          value={formData.Clarity}
+          onChange={handleChange}
+          placeholder="Enter Clarity"
+        />
+      </div>
+
+
+
+
+
+      <div className="form-group">
+        <label htmlFor="inclusion">inclusion:</label>
+        <input
+          type="text"
+          id="inclusion"
+          name="inclusion"
+          value={formData.inclusion}
+          onChange={handleChange}
+          placeholder="Enter inclusion"
+        />
+      </div>
+
+
+
+
+
+
+      <div className="form-group">
+        <label htmlFor="Finish">Finish:</label>
+        <input
+          type="text"
+          id="Finish"
+          name="Finish"
+          value={formData.Finish}
+          onChange={handleChange}
+          placeholder="Enter Finish"
+        />
+      </div>
+
+
+
+      <div className="form-group">
+        <label htmlFor="diamondType">Diamond Type:</label>
+        <input
+          type="text"
+          id="diamondType"
+          name="diamondType"
+          value={formData.diamondType}
+          onChange={handleChange}
+          placeholder="Enter Diamond Type"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="Fluorences">Fluorences:</label>
+        <input
+          type="text"
+          id="Fluorences"
+          name="Fluorences"
+          value={formData.Fluorences}
+          onChange={handleChange}
+          placeholder="Enter Fluorences"
+        />
+      </div>
+
+
+      </div>
+:
+<div>
+
       <div className="form-group">
         <label htmlFor="Reflective_Index">Reflective Index:</label>
         <input
@@ -200,6 +319,16 @@ const [isUserValid, setIsUserValid] = useState(true)
           placeholder="Enter Ruby Type"
         />
       </div>
+
+      </div>}
+
+
+
+
+
+
+
+
 
         </form>
         <button onClick={addData} id="submitBtn">Submit</button>

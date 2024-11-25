@@ -168,12 +168,32 @@ const [certificate_no, setCertificate_no] = useState("")
           <p>Shape & Cut :- <b>{data[0].Shape_and_Cut}</b> </p>
           <p>Colour :- <b>{data[0].Colour}</b> </p>
           <p>Measurement :- <b>{data[0].Measurement}</b> </p>
+
+          
+          {data[0].type=="diamond"?
+          <div>
+
+
+          <p>Clarity :- <b>{data[0].Clarity}</b> </p>
+          <p>Inclusion :- <b>{data[0].inclusion}</b> </p>
+          <p>Finish :- <b>{data[0].Finish}</b> </p>
+          <p>Fluorences :- <b>{data[0].Fluorences}</b> </p>
+
+          </div>
+:
+<div>
+
+
+
           <p>Reflective Index :- <b>{data[0].Reflective_Index}</b> </p>
           <p>Microscofic Obr. :- <b>{data[0].Microscopic_Obr}</b> </p>
           <p>Specific Gravity :- <b>{data[0].Specific_Gravity}</b> </p>
           <p>Species :- <b>{data[0].Species}</b> </p>
+
+
+          </div>}
           <div style={{textAlign:"center", padding:"5px",borderWidth:"2px",borderColor:"black",backgroundColor:"grey",width:"200px",alignItems:"center",alignContent:"center",margin:"auto"}}>
-            <h4 style={{color:"white",alignSelf:"center"}}>{data[0].ruby_type}</h4>
+            <h4 style={{color:"white",alignSelf:"center"}}>{data[0].type=="diamond"?data[0].diamondType: data[0].ruby_type}</h4>
           </div>
           </div></Modal.Body>
         

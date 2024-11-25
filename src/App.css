@@ -146,6 +146,33 @@ body{
 }
 
 
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.diamond-button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+}
+
+.ruby-button {
+  background-color: #ff4d4d;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1rem 2rem;
+}
+
+.activebtn {
+  background-color: #333;
+  color: #fff;
+}
 
 
 
